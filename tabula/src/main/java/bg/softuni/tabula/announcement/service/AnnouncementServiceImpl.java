@@ -1,4 +1,7 @@
 package bg.softuni.tabula.announcement.service;
 
-public class AnnouncementServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class AnnouncementServiceImpl implements AnnouncementService {
 }
