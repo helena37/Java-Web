@@ -61,6 +61,7 @@ dependencies {
 
     compileOnly "org.mapstruct:mapstruct"
     compileOnly "org.projectlombok:lombok"
+
     annotationProcessor "org.mapstruct:mapstruct-processor"
     annotationProcessor "org.projectlombok:lombok"
 
