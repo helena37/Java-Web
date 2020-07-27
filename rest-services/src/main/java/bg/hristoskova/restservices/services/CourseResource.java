@@ -67,4 +67,11 @@ public class CourseResource {
         return new ResponseEntity<Course>(updatedCourse, HttpStatus.OK);
     }
 
+    @PostMapping("/courses")
+    public ResponseEntity<Course> createCourse(@RequestBody Course body) {
+        Course createdCourse = this.courseRepository.save(body);
+
+        return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
+    }
+
 }
