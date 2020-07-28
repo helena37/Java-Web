@@ -1,5 +1,7 @@
 insert into courses(id, title, price, date, duration)
-values (2, 'Learn Angular and Spring Boot 2', 299.99, sysdate(), 2),
-       (3, 'Spring MVC', 100.00, sysdate(), 5),
-       (4, 'Hibernate', 50.00, sysdate(), 2),
-       (5, 'Angular 8', 300.00, sysdate(), 10);
+values (13, 'Java Fundamentals', 100.00, sysdate(), 15),
+       (14, 'C# Advanced', 399.00, sysdate(), 30),
+       (15, 'Java OOP', 399.00, sysdate(), 30),
+       (16, 'Spring Data', 30.00, sysdate(), 3),
+       (17, 'Bootstrap 4', 80.00, sysdate(), 1),
+       (18, 'REACT JS', 150.00, sysdate(), 2);
