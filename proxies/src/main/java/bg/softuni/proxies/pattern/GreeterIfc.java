@@ -1,2 +1,5 @@
-package bg.softuni.proxies.pattern;public interface GreeterIfc {
+package bg.softuni.proxies.pattern;
+
+public interface GreeterIfc {
+    public void greet();
 }

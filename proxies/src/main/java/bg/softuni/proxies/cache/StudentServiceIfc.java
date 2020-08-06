@@ -1,2 +1,8 @@
-package bg.softuni.proxies.cache;public interface StudentServiceIfc {
+package bg.softuni.proxies.cache;
+
+
+import java.util.List;
+
+public interface StudentServiceIfc {
+    List<Student> getAllStudents();
 }
