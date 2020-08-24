@@ -13,6 +13,7 @@ public class GameField extends Rectangle {
     public void drawGameField(Graphics2D g2d) {
         //Draw game frame
         g2d.setColor(new Color(146, 43, 33));
+        g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2d.drawRect(x, y, width, height);
 
         //Draw players symbols
