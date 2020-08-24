@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 public class GamePanel extends JPanel implements MouseListener {
     public GamePanel() {
-        setBackground(Color.WHITE);
+        setBackground(new Color(253, 235, 208));
         requestFocus();
         addMouseListener(this);
     }
