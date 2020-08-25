@@ -6,7 +6,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class GamePanel extends JPanel implements MouseListener {
+    private WinResult winResult;
+
     public GamePanel() {
+        this.winResult = null;
         setBackground(new Color(253, 235, 208));
         requestFocus();
         addMouseListener(this);
@@ -23,6 +26,18 @@ public class GamePanel extends JPanel implements MouseListener {
         for (GameField field : GameEngine.instance.getFields()) {
             field.drawGameField(g2d);
         }
+
+        //Draw winner line
+        if (winResult != null) {
+            g2d.setColor(new Color(211, 84, 0));
+            g2d.setStroke(new BasicStroke(10));
+            g2d.drawLine((int) (winResult.getField1().getX() + winResult.getField1().getWidth() / 2),
+                    (int) (winResult.getField1().getY() + winResult.getField1().getHeight() / 2),
+                    (int) (winResult.getField2().getX() + winResult.getField2().getWidth() / 2),
+                    (int) (winResult.getField2().getY() + winResult.getField2().getHeight() / 2));
+
+            winResult = null;
+        }
     }
 
     @Override
@@ -32,7 +47,11 @@ public class GamePanel extends JPanel implements MouseListener {
     }
 
     private void checkWin() {
-        if (GameEngine.instance.hasWinner()) {
+        WinResult tempResult = GameEngine.instance.hasWinner();
+
+        if (tempResult.isWon()) {
+            winResult = tempResult;
+            repaint();
             JOptionPane.showMessageDialog(this,
                     "Player " + GameEngine.instance.getCurrentPlayer().name() + " is the Winner!",
                     "GAME OVER!",
@@ -55,7 +74,7 @@ public class GamePanel extends JPanel implements MouseListener {
         for (GameField field : GameEngine.instance.getFields()) {
             if (cursorPosition.intersects(field)) {
                 if (field.getValue() == GameFieldValue.EMPTY) {
-                    field.setValue(GameEngine.instance.getCurrentPlayer());
+                    field.setValue(GameEngine.instance.getNextPlayer());
                     repaint();
 
                     GameEngine.instance.nextPlayerTurn();
