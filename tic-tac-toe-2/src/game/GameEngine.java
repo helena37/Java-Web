@@ -3,8 +3,25 @@ package game;
 import java.util.ArrayList;
 
 public class GameEngine {
+    private GameFieldValue nextPlayer;
     private GameFieldValue currentPlayer;
     private ArrayList<GameField> fields;
+    private int[] winningConstellations = new int[] {
+            //rows
+            0, 1, 2,
+            3, 4, 5,
+            6, 7, 8,
+            //cols
+            0, 3, 6,
+            1, 4, 7,
+            2, 5, 8,
+            //diagonals
+            0, 4, 8,
+            6, 4, 2
+    };
+
+
+    private GameWindow window;
 
     public static GameEngine instance;
 
@@ -13,14 +30,14 @@ public class GameEngine {
     }
 
     public GameEngine() {
-        new GameWindow(450, 460);
+        window = new GameWindow(450, 465);
         initGame();
     }
 
     public void initGame() {
-        //Player
-        currentPlayer = GameFieldValue.X;
-
+//        //Player
+        nextPlayer = GameFieldValue.X;
+        nextPlayerTurn();
         //Game Fields
         int fieldsMarginLeft = 20;
         int fieldsMarginTop = 5;
@@ -40,11 +57,20 @@ public class GameEngine {
     }
 
     public void nextPlayerTurn() {
-        if (currentPlayer == GameFieldValue.X) {
-            currentPlayer = GameFieldValue.O;
-        } else {
+
+        if (nextPlayer == GameFieldValue.X) {
+            nextPlayer = GameFieldValue.O;
             currentPlayer = GameFieldValue.X;
+        } else {
+            nextPlayer = GameFieldValue.X;
+            currentPlayer = GameFieldValue.O;
         }
+
+        window.setCurrentPlayerName("Player " + nextPlayer.name() + " turn!");
+    }
+
+    public GameFieldValue getNextPlayer() {
+        return nextPlayer;
     }
 
     public GameFieldValue getCurrentPlayer() {
@@ -55,29 +81,19 @@ public class GameEngine {
         return fields;
     }
 
-    public boolean hasWinner() {
-        int[][] matrix = new int[3][3];
-        matrix[0][0] = fields.get(0).getValue().getValue();
-        matrix[0][1] = fields.get(1).getValue().getValue();
-        matrix[0][2] = fields.get(2).getValue().getValue();
-        matrix[1][0] = fields.get(3).getValue().getValue();
-        matrix[1][1] = fields.get(4).getValue().getValue();
-        matrix[1][2] = fields.get(5).getValue().getValue();
-        matrix[2][0] = fields.get(6).getValue().getValue();
-        matrix[2][1] = fields.get(7).getValue().getValue();
-        matrix[2][2] = fields.get(8).getValue().getValue();
+    public WinResult hasWinner() {
+        for (int i = 0; i < winningConstellations.length; i+= 3) {
+            int currentValue1 = winningConstellations[i];
+            int currentValue2 = winningConstellations[i + 1];
+            int currentValue3 = winningConstellations[i + 2];
+            if (Math.abs(fields.get(currentValue1).getValue().getValue() +
+                    fields.get(currentValue2).getValue().getValue() +
+                    fields.get(currentValue3).getValue().getValue()) == 3) {
 
-        return  //Rows
-                        Math.abs(matrix[0][0] + matrix[0][1] + matrix[0][2]) == 3 ||
-                        Math.abs(matrix[1][0] + matrix[1][1] + matrix[1][2]) == 3 ||
-                        Math.abs(matrix[2][0] + matrix[2][1] + matrix[2][2]) == 3 ||
-                        //Cols
-                        Math.abs(matrix[0][0] + matrix[1][0] + matrix[2][0]) == 3 ||
-                        Math.abs(matrix[0][1] + matrix[1][1] + matrix[2][1]) == 3 ||
-                        Math.abs(matrix[0][2] + matrix[1][2] + matrix[2][2]) == 3 ||
-                        // Diagonals
-                        Math.abs(matrix[0][0] + matrix[1][1] + matrix[2][2]) == 3 ||
-                        Math.abs(matrix[0][2] + matrix[1][1] + matrix[2][0]) == 3;
+                return new WinResult(true, fields.get(currentValue1), fields.get(currentValue3));
+            }
+        }
+        return new WinResult(false, null, null);
     }
 
     public boolean hasDraw() {
@@ -86,6 +102,6 @@ public class GameEngine {
                 return false;
             }
         }
-        return !hasWinner();
+        return !hasWinner().isWon();
     }
 }
