@@ -1,5 +1,6 @@
 package bg.hristoskova.blog.web;
 
+import bg.hristoskova.blog.model.binding.LoginRequest;
 import bg.hristoskova.blog.model.binding.RegisterRequest;
 import bg.hristoskova.blog.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -23,5 +24,10 @@ public class AuthController {
         this.authService.register(registerRequest);
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public void login(@RequestBody LoginRequest loginRequest) {
+        this.authService.login(loginRequest);
     }
 }
