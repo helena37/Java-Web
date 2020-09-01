@@ -1,9 +1,5 @@
 # Java-Web
 
-<<<<<<< HEAD
---> All projects are part from SoftUni Software Engineering Program for course Java Web Development <--
-=======
------> The Tic-Tac-Toe Game is my own project. <----
+--> All projects except "spring-angular-blog" are part from SoftUni Software Engineering Program for course Java Web Development <--
 
---> All other projects are part from SoftUni Software Engineering Program for course Java Web Development <--
->>>>>>> a857b69... Create README.md
+
