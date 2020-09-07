@@ -1,6 +1,7 @@
 package bg.hristoskova.blog.service.impl;
 
 import bg.hristoskova.blog.model.User;
+import bg.hristoskova.blog.model.binding.AuthenticationResponse;
 import bg.hristoskova.blog.model.binding.LoginRequest;
 import bg.hristoskova.blog.model.binding.RegisterRequest;
 import bg.hristoskova.blog.repository.UserRepository;
@@ -38,14 +39,16 @@ public class AuthServiceImpl implements AuthService {
         this.userRepository.save(user);
     }
 
-    @Override
-    public String login(LoginRequest loginRequest) {
-        Authentication authenticate = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginRequest.getUsername(),
-                loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
-       return this.jwtProvider.generateToken(authenticate);
-    }
+   public AuthenticationResponse login(LoginRequest loginRequest) {
+       Authentication authenticate =
+               this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                       loginRequest.getUsername(),
+                       loginRequest.getPassword()));
+       SecurityContextHolder.getContext().setAuthentication(authenticate);
+       String authenticationToken = this.jwtProvider.generateToken(authenticate);
+
+       return new AuthenticationResponse(authenticationToken, loginRequest.getUsername());
+   }
 
     @Override
     public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {

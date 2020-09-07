@@ -1,5 +1,6 @@
 package bg.hristoskova.blog.web;
 
+import bg.hristoskova.blog.model.binding.AuthenticationResponse;
 import bg.hristoskova.blog.model.binding.LoginRequest;
 import bg.hristoskova.blog.model.binding.RegisterRequest;
 import bg.hristoskova.blog.service.AuthService;
@@ -24,7 +25,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody LoginRequest loginRequest) {
-        this.authService.login(loginRequest);
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+       return this.authService.login(loginRequest);
     }
 }
