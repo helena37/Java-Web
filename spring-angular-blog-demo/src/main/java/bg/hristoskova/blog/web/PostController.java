@@ -1,5 +1,6 @@
 package bg.hristoskova.blog.web;
 
+import bg.hristoskova.blog.model.Post;
 import bg.hristoskova.blog.model.binding.PostDto;
 import bg.hristoskova.blog.service.PostService;
 import org.springframework.http.HttpStatus;
@@ -32,5 +33,18 @@ public class PostController {
     @GetMapping("/get/{id}")
     public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody Long id) {
         return new ResponseEntity<>(this.postService.readSinglePost(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable @RequestBody Long id) {
+        Post post = this.postService.findById(id);
+
+        if (post == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        this.postService.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

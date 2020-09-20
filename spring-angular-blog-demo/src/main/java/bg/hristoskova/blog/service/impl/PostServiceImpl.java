@@ -74,6 +74,16 @@ public class PostServiceImpl implements PostService {
         return post;
     }
 
+    @Override
+    public Post findById(Long id) {
+        return this.postRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        this.postRepository.deleteById(id);
+    }
+
 
     @Override
     public PostDto readSinglePost(Long id) {

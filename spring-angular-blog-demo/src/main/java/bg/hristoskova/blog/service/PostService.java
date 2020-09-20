@@ -12,4 +12,8 @@ public interface PostService {
 
     PostDto mapFromPostToDto(Post post);
     Post mapFromDtoToPost(PostDto postDto);
+
+    Post findById(Long id);
+
+    void deleteById(Long id);
 }
