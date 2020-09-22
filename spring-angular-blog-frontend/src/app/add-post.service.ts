@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {PostPayload} from "./add-post/post-payload";
 import {Observable} from "rxjs";
 
+const baseUrl = 'http://localhost:8080/api/posts/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +13,7 @@ export class AddPostService {
   constructor(private httpClient: HttpClient) { }
 
   addPost(postPayload: PostPayload) {
-    return this.httpClient.post('http://localhost:8080/api/posts/', postPayload)
+    return this.httpClient.post(baseUrl, postPayload)
   }
 
   getAllPosts(): Observable<Array<PostPayload>> {
@@ -20,5 +22,9 @@ export class AddPostService {
 
   getPost(permaLink: Number): Observable<PostPayload> {
     return this.httpClient.get<PostPayload>('http://localhost:8080/api/posts/get/' + permaLink);
+  }
+
+  delete(id): Observable<any> {
+    return this.httpClient.delete(`${baseUrl}${id}`);
   }
 }
