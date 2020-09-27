@@ -9,6 +9,7 @@ public interface PostService {
     void createPost(PostDto postDto);
     List<PostDto> showAllPosts();
     PostDto readSinglePost(Long id);
+    Post save(Post post);
 
     PostDto mapFromPostToDto(Post post);
     Post mapFromDtoToPost(PostDto postDto);

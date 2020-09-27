@@ -76,7 +76,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findById(Long id) {
-        return this.postRepository.findById(id).orElse(null);
+        return this.postRepository.findById(id)
+                .orElse(null);
     }
 
     @Override
@@ -90,5 +91,11 @@ public class PostServiceImpl implements PostService {
         Post post = this.postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("For id " + id));
 
         return mapFromPostToDto(post);
+    }
+
+    @Override
+    public Post save(Post post) {
+
+       return this.postRepository.save(post);
     }
 }

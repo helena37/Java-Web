@@ -35,6 +35,20 @@ public class PostController {
         return new ResponseEntity<>(this.postService.readSinglePost(id), HttpStatus.OK);
     }
 
+    @PutMapping("edit/{id}")
+    public  ResponseEntity<Post> updatePost(@RequestBody Post post,
+                                               @PathVariable Long id) {
+        Post postToEdit = this.postService.findById(id);
+
+        if (postToEdit == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Post updatedPost = this.postService.save(post);
+
+        return new ResponseEntity<Post>(updatedPost, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable @RequestBody Long id) {
         Post post = this.postService.findById(id);
