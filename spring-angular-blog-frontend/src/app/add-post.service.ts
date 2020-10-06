@@ -24,7 +24,11 @@ export class AddPostService {
     return this.httpClient.get<PostPayload>('http://localhost:8080/api/posts/get/' + permaLink);
   }
 
-  delete(id): Observable<any> {
+  delete(id: Number): Observable<any> {
     return this.httpClient.delete(`${baseUrl}${id}`);
+  }
+
+  edit(id: Number, value: any): Observable<Object> {
+    return this.httpClient.put(`${baseUrl}edit/${id}`, value);
   }
 }

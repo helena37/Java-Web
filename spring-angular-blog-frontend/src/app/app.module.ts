@@ -40,6 +40,7 @@ import {AuthService} from "./auth/auth.service";
       {path: '', component: HomeComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'post/:id', component: PostComponent},
+      {path: 'edit/:id', component: PostComponent},
       {path: 'login', component: LoginComponent},
       {path: 'user/:id', component: LoginComponent},
       {path: 'register-success', component: RegisterSuccessComponent},
