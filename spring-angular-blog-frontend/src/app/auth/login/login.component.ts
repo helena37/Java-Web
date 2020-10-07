@@ -12,8 +12,9 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginPayload: LoginPayload;
+  message: string;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
       username: new FormControl(),
       password: new FormControl()
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       } else {
         console.log('Login Failed');
+        this.message = "A problem was occurred. Please check your username or/and password!";
       }
     });
   }
