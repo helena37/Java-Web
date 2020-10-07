@@ -1,5 +1,8 @@
 package bg.hristoskova.blog.model.binding;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class PostDto {
     private Long id;
     private String title;
@@ -17,6 +20,8 @@ public class PostDto {
         this.id = id;
     }
 
+    @Size(min = 3, message = "Title should be at least 3 characters!")
+    @NotNull(message = "Title is a required field")
     public String getTitle() {
         return title;
     }
@@ -25,6 +30,8 @@ public class PostDto {
         this.title = title;
     }
 
+    @Size(min = 6, message = "Blog should contains at least 6 characters!")
+    @NotNull(message = "Blog content is a required field")
     public String getContent() {
         return content;
     }
