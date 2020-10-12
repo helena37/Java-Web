@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginPayload: LoginPayload;
-  message: string;
+  showErrorMessage: boolean;
 
   constructor(public authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showErrorMessage = false;
     this.loginPayload.username = this.loginForm.get('username').value;
     this.loginPayload.password = this.loginForm.get('password').value;
 
@@ -40,8 +41,9 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       } else {
         console.log('Login Failed');
-        this.message = "A problem was occurred. Please check your username or/and password!";
       }
+    }, error => {
+      this.showErrorMessage = true;
     });
   }
 }
