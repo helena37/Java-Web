@@ -1,6 +1,8 @@
 package bg.softuni.eshop.service;
 
 import bg.softuni.eshop.domain.entity.User;
+import bg.softuni.eshop.domain.service.UserServiceModel;
+import bg.softuni.eshop.service.impl.UserServiceImpl;
 
 
 /**
@@ -9,5 +11,5 @@ import bg.softuni.eshop.domain.entity.User;
  * @since 7.08.21
  */
 public interface UserService {
-
+    UserServiceModel register(UserServiceModel userServiceModel);
 }
