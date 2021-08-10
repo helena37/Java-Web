@@ -6,4 +6,5 @@ package bg.softuni.eshop.service;
  * @since 7.08.21
  */
 public interface ProductService {
+
 }

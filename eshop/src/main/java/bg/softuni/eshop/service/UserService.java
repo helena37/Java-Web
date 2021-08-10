@@ -1,5 +1,8 @@
 package bg.softuni.eshop.service;
 
+import bg.softuni.eshop.domain.entity.User;
+
+
 /**
  * @author helena81
  * @version 1.0

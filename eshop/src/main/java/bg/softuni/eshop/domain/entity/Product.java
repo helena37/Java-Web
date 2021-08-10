@@ -19,13 +19,13 @@ public class Product extends BaseEntity {
     private String name;
     private String description;
     private BigDecimal price;
-    private Category category;
-    private Gender gender;
+    private String category;
+    private String gender;
 
     public Product() {
     }
 
-    public Product(String name, String description, BigDecimal price, Category category, Gender gender) {
+    public Product(String name, String description, BigDecimal price, String category, String gender) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -33,7 +33,7 @@ public class Product extends BaseEntity {
         this.gender = gender;
     }
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -42,7 +42,7 @@ public class Product extends BaseEntity {
         this.name = name;
     }
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -60,21 +60,21 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
-    @Enumerated(STRING)
-    public Category getCategory() {
+    @Column(name = "category", nullable = false)
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    @Enumerated(STRING)
-    public Gender getGender() {
+    @Column(name = "gender", nullable = false)
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 }

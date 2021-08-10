@@ -22,7 +22,7 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     public String getUsername() {
         return username;
     }
