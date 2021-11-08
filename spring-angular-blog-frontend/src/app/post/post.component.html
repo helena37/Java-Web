@@ -1,0 +1,35 @@
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8">
+        <div [hidden]="validateUser()">
+        <h1 class="blog-title">{{post.title}}</h1>
+        <span>
+          <i class="far fa-user">by {{post.username}}</i>
+        </span>
+        <hr>
+        <p [innerHTML]="post.content"></p>
+        <hr>
+        </div>
+        <div [hidden]="!validateUser()" *ngIf="authService.isAuthenticated()">
+        <form [formGroup]="editForm" (ngSubmit)="updatePost()">
+          <div class="form-group">
+            <label class="post-title"></label>
+            <input type="text" [formControlName]="'title'" class="form-control" [(ngModel)]="post.title">
+          </div>
+          <div class="form-group">
+            <label class="post-content"></label>
+            <editor [formControlName]="'content'" [(ngModel)]="post.content" [init]="{plugins: 'link'}"></editor>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="badge badge-success mr-2">Update</button>
+            <button type="button" class="badge badge-danger mr-2" (click)="deletePost()">Delete</button>
+          </div>
+        </form>
+        </div>
+<!--        <button type="button" class="badge badge-info" (click)="share()">Share</button>-->
+      </div>
+    </div>
+  </div>
+</div>
