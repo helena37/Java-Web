@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.3</version>
+		<version>2.5.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>bg.softuni</groupId>
+	<groupId>bg.hristoskova</groupId>
 	<artifactId>eshop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>eshop</name>
-	<description>SoftUni Bootcamp Project Example</description>
+	<description>Bootcamp preparation</description>
 	<properties>
 		<java.version>16</java.version>
 	</properties>
@@ -50,12 +50,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>2.3.6</version>
-        </dependency>
-    </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>
