@@ -1,0 +1,13 @@
+package bg.hristoskova.judge1;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class Judge1ApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
