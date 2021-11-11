@@ -34,8 +34,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public ModelAndView login(@Valid @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
+                        BindingResult bindingResult, ModelAndView modelAndView) {
+        modelAndView.addObject("userLoginBindingModel", userLoginBindingModel);
+        modelAndView.setViewName("login");
+
+        return modelAndView;
     }
 
     @GetMapping("/register")
@@ -50,7 +54,7 @@ public class UserController {
                                         ModelAndView modelAndView,
                                         RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            //TODO validation
+            redirectAttributes.addFlashAttribute("userAddBindingModel", userAddBindingModel);
             modelAndView.setViewName("redirect:/users/register");
         } else {
             UserServiceModel userServiceModel = this.userService.registerUser(
@@ -64,18 +68,26 @@ public class UserController {
     public ModelAndView loginConfirm(@Valid @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
                                      BindingResult bindingResult,
                                      ModelAndView modelAndView,
-                                     HttpSession httpSession) {
+                                     HttpSession httpSession,
+                                     RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            //TODO Validation
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             modelAndView.setViewName("redirect:/users/login");
         } else {
-            modelAndView.setViewName("redirect:/");
+            UserServiceModel user =
+                    this.userService.findByUsername(userLoginBindingModel.getUsername());
+
+            if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())) {
+                redirectAttributes.addFlashAttribute("notFound", true);
+                redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+                modelAndView.setViewName("redirect:/users/login");
+            } else {
+                httpSession.setAttribute("user", user);
+                httpSession.setAttribute("id", user.getId());
+                httpSession.setAttribute("role", user.getRole().getName());
+                modelAndView.setViewName("redirect:/");
+            }
         }
-        //TODO Login in Service
-        httpSession.setAttribute("user", "userServiceModel");
-        httpSession.setAttribute("id", "userId");
-
         return modelAndView;
-
     }
 }
