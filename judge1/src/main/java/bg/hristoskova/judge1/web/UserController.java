@@ -43,7 +43,8 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(@Valid @ModelAttribute("userAddBindingModel") UserAddBindingModel userAddBindingModel,
+                                 BindingResult bindingResult) {
         return "register";
     }
 

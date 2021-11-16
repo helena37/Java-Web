@@ -3,7 +3,6 @@ package bg.hristoskova.judge1.model.binding;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -22,7 +21,6 @@ public class UserAddBindingModel {
     }
 
     @Length(min = 2, max = 10, message = "Username should be at least 2 and maximal 10 characters!")
-    @NotNull
     public String getUsername() {
         return username;
     }
@@ -32,7 +30,6 @@ public class UserAddBindingModel {
     }
 
     @Length(min = 2, message = "Password should be at least 2 characters!")
-    @NotNull
     public String getPassword() {
         return password;
     }
@@ -50,7 +47,6 @@ public class UserAddBindingModel {
     }
 
     @Email
-    @NotNull
     public String getEmail() {
         return email;
     }
