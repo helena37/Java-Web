@@ -1,5 +1,7 @@
 package bg.hristoskova.judge1.service.impl;
 
+import bg.hristoskova.judge1.model.entity.Exercise;
+import bg.hristoskova.judge1.model.service.ExerciseServiceModel;
 import bg.hristoskova.judge1.repository.ExerciseRepository;
 import bg.hristoskova.judge1.service.ExerciseService;
 import org.modelmapper.ModelMapper;
@@ -20,4 +22,8 @@ public class ExerciseServiceImpl implements ExerciseService {
         this.modelMapper = modelMapper;
     }
 
+    @Override
+    public void addExercise(ExerciseServiceModel exerciseServiceModel) {
+        this.exerciseRepository.saveAndFlush(this.modelMapper.map(exerciseServiceModel, Exercise.class));
+    }
 }

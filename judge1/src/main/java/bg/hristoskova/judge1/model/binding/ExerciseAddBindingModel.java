@@ -29,7 +29,7 @@ public class ExerciseAddBindingModel {
         this.name = name;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd 'T' HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @PastOrPresent(message = "The date cannot be in the future!")
     public LocalDateTime getStartedOn() {
         return startedOn;
@@ -39,7 +39,7 @@ public class ExerciseAddBindingModel {
         this.startedOn = startedOn;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd 'T' HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @FutureOrPresent(message = "The date cannot be in the past!")
     public LocalDateTime getDueDate() {
         return dueDate;

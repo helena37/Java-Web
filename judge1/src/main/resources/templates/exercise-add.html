@@ -26,7 +26,7 @@
                 <div class="row mt-4 tm-edit-product-row">
                     <div class="col-xl-7 col-lg-7 col-md-12">
                         <form th:action="@{/exercises/add}" th:method="POST"
-                              th:object="${exerciseAddBindingModel}" class="tm-edit-product-form" >
+                              th:object="${exerciseAddBindingModel}" class="tm-edit-product-form">
                             <div class="input-group mb-3">
                                 <label for="name" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Name
                                 </label>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="input-group mb-3 justify-content-center">
                                 
-                                    <small class="text-danger">Exercise name length must be more than 2 characters</small>
+                                    <small th:each="e : ${#fields.errors('name')}" th:text="${e}" class="text-danger">Exercise name length must be more than 2 characters</small>
                                 
                             </div>
                             <div class="input-group mb-3">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="input-group mb-3 justify-content-center">
                                 
-                                    <small class="text-danger">The date cannot be in the future!</small>
+                                    <small th:each="e : ${#fields.errors('startedOn')}" th:text="${e}" class="text-danger">The date cannot be in the future!</small>
                                 
                             </div>
                             <div class="input-group mb-3 ">
@@ -61,7 +61,7 @@
                             </div>
                             <div class="input-group mb-3 justify-content-center">
                                 
-                                    <small class="text-danger" >The date cannot be in the past!</small>
+                                    <small th:each="e : ${#fields.errors('dueDate')}" th:text="${e}" class="text-danger">The date cannot be in the past!</small>
                                
                             </div>
                             <div class="input-group mb-3">
