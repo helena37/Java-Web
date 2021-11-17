@@ -14,4 +14,6 @@ public interface UserService {
     UserServiceModel findByUsername(String username);
     List<String> findAllUsernames();
     void addRoleToUser(String username, String role);
+
+    UserServiceModel findById(String id);
 }
